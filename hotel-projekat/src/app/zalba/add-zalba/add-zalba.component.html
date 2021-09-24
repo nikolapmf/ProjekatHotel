@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="center">
+        <h1>Podnosenje zalbe</h1>
+        <div>
+            <h4>Zalba se salje na ime: {{ime}} {{prezime}} </h4>
+        </div>
+        <form (ngSubmit)="addZalba()">
+            <div>
+                <input class="form-control" type="text" name="zalba" required [(ngModel)]="zalba"/>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Posalji zalbu</button>
+            </div>
+        </form>
+    </div>
+
+</div>

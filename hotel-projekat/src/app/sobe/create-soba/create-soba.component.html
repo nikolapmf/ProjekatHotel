@@ -1,0 +1,35 @@
+<div class="container">
+
+    <div class="center">
+        <h1>Dodavanje nove sobe</h1>
+        <form (ngSubmit)="addSoba(sobaForm)" #sobaForm="ngForm">
+            
+            <div>
+                <label>Broj kreveta</label>
+                 <input class="form-control" type="number" name="brojKreveta" #brojKreveta="ngModel" required [(ngModel)]="soba.brojKreveta"/>
+            </div>
+            <div>
+                <label>Tip sobe</label>
+                 <input class="form-control" type="text" name="tipSobe" #tipSobe="ngModel" required [(ngModel)]="soba.tipSobe"/>
+            </div>
+            <div>
+                <label>Kvadratura</label>
+                 <input class="form-control" type="number" name="kvadratura" #kvadratura="ngModel" required [(ngModel)]="soba.kvadratura"/>
+            </div>
+            <div>
+                <label>Cena nocenja</label>
+                 <input class="form-control" type="number" name="cena" #cena="ngModel" required [(ngModel)]="soba.cena"/>
+            </div>
+            <div>
+                <label>Slika URL</label>
+                 <input class="form-control" type="text" name="imgUrl" #imgUrl="ngModel" required
+                 [(ngModel)]="soba.imgUrl"/>
+            </div>
+            <div>
+                <button style="margin-top: 2%;" type="submit" class="btn btn-primary">Dodaj</button>
+            </div>
+        </form>
+
+    </div>
+
+</div>

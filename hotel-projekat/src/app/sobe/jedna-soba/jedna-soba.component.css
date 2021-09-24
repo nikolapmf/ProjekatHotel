@@ -1,0 +1,15 @@
+.container {
+    border-style: solid;
+    border-width: 2px;
+    margin: 10px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+#fontic {
+    font: italic 1.2em "Fira Sans", serif;
+}

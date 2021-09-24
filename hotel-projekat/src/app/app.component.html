@@ -1,0 +1,30 @@
+<html>
+        <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        </head>
+        <body class="gradient-custom" >
+                <nav class="navbar navbar-dark bg-dark">
+                        <form class="container-fluid justify-content-start">
+                                <button class="btn btn-outline-success me-2" type="button" 
+                                        routerLink="/sobe" routerLinkActive="active">Pocetna strana</button>
+                                <button class="btn btn-sm btn-outline-secondary" type="button" 
+                                        routerLink="/login" routerLinkActive="active">Login</button>
+                                <button class="btn btn-sm btn-outline-secondary" type="button" 
+                                        routerLink="/register" routerLinkActive="active">Register</button>
+                                <button class="btn btn-sm btn-outline-secondary" type="button" *ngIf="adminLogovan" 
+                                        routerLink="/add-soba" routerLinkActive="active">Dodavanje nove sobe</button>
+                                <button class="btn btn-sm btn-outline-secondary" type="button" *ngIf="korisnikLogovan" 
+                                        routerLink="/add-zalba" routerLinkActive="active">Slanje zalbe</button>
+                                <button class="btn btn-sm btn-outline-secondary" type="button" 
+                                        routerLink="/contact" routerLinkActive="active">Kontakt</button>
+                                <button class="btn btn-sm btn-outline-secondary" type="button" 
+                                        *ngIf="korisnikLogovan || adminLogovan" (click)="removeToken()" style="margin-left: 50%">Log out</button>
+                        </form>
+                </nav>
+                <div class="container" style="height: 100%;">
+                        <router-outlet></router-outlet>
+                </div>
+        </body>
+</html>

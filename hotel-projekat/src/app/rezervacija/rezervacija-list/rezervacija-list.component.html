@@ -1,0 +1,16 @@
+<div class="container">
+    <table>
+        <tr>
+            <th>Ime i prezime</th>
+            <th>Datum</th>
+            <th>Broj sobe</th>
+            <th>Broj nocenja</th>
+        </tr>
+        <tr *ngFor="let rezervacija of rezervacije">
+            <td>{{rezervacija.korisnik}}</td>
+            <td>{{rezervacija.datum}}</td>
+            <td>{{rezervacija.soba}}</td>
+            <td>{{rezervacija.brojNocenja}}</td>
+        </tr>
+    </table>
+</div>

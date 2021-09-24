@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div class="center col-6" id="fontic">Broj kreveta: {{soba.brojKreveta}}<br>
+            Broj sobe: {{soba.idSoba}}<br>
+            Tip sobe: {{soba.tipSobe}}<br>
+            Kvadratura: {{soba.kvadratura}}m2<br>
+            Cena nocenja: {{soba.cena}} EUR<br>
+            <span><a href="/add-rezervacija?idSoba={{soba.idSoba}}&cena={{soba.cena}}"><button class="btn btn-primary" *ngIf="korisnikLogovan">Rezervisi sobu</button></a></span>
+            <span><button (click)="deleteSoba()" *ngIf="adminLogovan" class="btn btn-danger">Ukloni</button></span>
+        </div>
+        <div class="col-6"><img [src]="soba.imgUrl" width="400px"></div>
+    </div>
+</div>

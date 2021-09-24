@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="center">
+        <h1>Rezervisanje sobe</h1>
+        <div>
+            <h4>Rezervacija na ime: {{ime}} {{prezime}} </h4>
+        </div>
+        <form (ngSubmit)="addRezervacija()">
+            <div>
+                <label>Datum polaska</label>
+                <input class="form-control" type="date" name="datum" required [(ngModel)]="datum"/>
+            </div>
+            <div>
+                <label>Broj nocenja</label>
+                <input class="form-control" type="number" name="brojNocenja" required [(ngModel)]="brojNocenja"/>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Dodaj</button>
+            </div>
+        </form>
+    </div>
+
+</div>

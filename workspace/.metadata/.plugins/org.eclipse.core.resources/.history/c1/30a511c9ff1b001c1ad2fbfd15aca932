@@ -1,0 +1,128 @@
+package com.example.demo.controller;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.repository.KorisnikRepository;
+import com.example.demo.repository.SobaRepository;
+import com.example.demo.repository.UlogaRepository;
+
+import classes.Response;
+import model.Korisnik;
+import model.Rezervacija;
+import model.Soba;
+import model.Uloga;
+
+@RestController
+
+@RequestMapping("/api/")
+public class Kontroler {
+
+	@Autowired
+	SobaRepository sr;
+	@Autowired
+	KorisnikRepository kr;
+	@Autowired
+	UlogaRepository ur;
+	
+	@GetMapping(value = "getSveSobe")
+	public ResponseEntity<List<Soba>> getSveSobe() {
+		return new ResponseEntity<List<Soba>>(sr.findAll(), HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "addSoba")
+	public ResponseEntity<Soba> addSoba(@RequestParam(name = "brojKreveta") String brojKreveta, 
+										@RequestParam(name = "tipSobe") String tipSobe, 
+										@RequestParam(name = "kvadratura") String kvadratura,
+										@RequestParam(name = "cena") String cena,
+										@RequestParam(name = "imgUrl") String imgUrl) {
+		Soba s = new Soba();
+		int brKreveta = Integer.parseInt(brojKreveta);
+		int kvadraturaInt = Integer.parseInt(kvadratura);
+		int cenaInt = Integer.parseInt(cena);
+		s.setBrojKreveta(brKreveta);
+		s.setTipSobe(tipSobe);
+		s.setKvadratura(kvadraturaInt);
+		s.setCena(cenaInt);
+		s.setImgUrl(imgUrl);
+		sr.save(s);
+		
+		return new ResponseEntity<Soba>(s, HttpStatus.OK);
+	}
+	
+	@PostMapping("deleteSoba")
+	public ResponseEntity<Boolean> deleteSoba(@RequestParam(name = "idSoba") String idSoba) {
+		int sobaInt = Integer.parseInt(idSoba);
+		Soba s = sr.findById(sobaInt).get();
+		sr.delete(s);
+		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "login")
+	public ResponseEntity<Response> login(@RequestParam(name = "username") String username,
+			@RequestParam(name = "password") String password) {
+		Response r = new Response();
+
+		if (kr.findByUsername(username) != null) {
+			if (kr.findByUsername(username).getPassword().equals(password)) {
+				r.setUsername(username);
+				r.setIdUloga(kr.findByUsername(username).getUloga().getIdUloga());
+				r.setIme(kr.findByUsername(username).getIme());
+				r.setPrezime(kr.findByUsername(username).getPrezime());
+			}
+		}
+		System.out.print("Ulogovao se : "+r.getUsername());
+		return new ResponseEntity<Response>(r, HttpStatus.OK);
+
+	}
+	
+	@PostMapping(value = "register")
+	public ResponseEntity<Boolean> register(@RequestBody Korisnik korisnik) {
+		if (korisnik.getUsername() != null && kr.findByUsername(korisnik.getUsername()) != null) {
+			return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+		}
+		Korisnik k = new Korisnik();
+		Uloga u = ur.findByNaziv("korisnik");
+		
+		k.setIme(korisnik.getIme());
+		k.setPrezime(korisnik.getPrezime());
+		k.setUsername(korisnik.getUsername());
+		k.setPassword(korisnik.getPassword());
+		k.setAdresa(korisnik.getAdresa());
+		k.setJmbg(korisnik.getJmbg());
+		k.setUloga(u);
+		
+		kr.save(k);
+
+		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+
+	}
+	
+	@PostMapping(value = "addRezervacija")
+	public ResponseEntity<Rezervacija> addRezervacija(@RequestParam(name = "username") String username, 
+													  @RequestParam(name = "idSoba") String idSoba, 
+													  @RequestParam(name = "datum") Date datum, 
+													  @RequestParam(name = "brojNocenja") int brojNocenja) {
+		Soba s = sr.findById(Integer.parseInt(idSoba)).get();
+		Rezervacija r = new Rezervacija();
+		r.setDestinacija(dr.findByNaziv(dest));
+		r.setKorisnik(kr.findByUsername(username));
+		r.setSmestaj(sr.findByOpisSmestaja(smestaj));
+		r.setTransport(tr.findByOpisTransporta(transport));
+		double cenaDouble = Double.parseDouble(cenaString);
+		r.setCena((int) cenaDouble);
+		rr.save(r);
+		return new ResponseEntity<Rezervacija>(r, HttpStatus.OK);
+
+	}
+}

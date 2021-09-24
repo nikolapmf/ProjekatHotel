@@ -1,0 +1,50 @@
+<div class="container">
+    <h1>Registrovanje</h1>
+    <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+        <div>
+            <label for="ime" class="form-label">First name</label>
+            <input type="text" class="form-control" id="ime" required #ime="ngModel" name="ime" [(ngModel)]="korisnik.ime">
+        </div>
+        <div class="err" *ngIf="ime.invalid && ime.dirty">
+             Ime je obavezno!
+        </div>
+        <div>
+            <label for="prezime" class="form-label">Last name</label>
+            <input type="text" class="form-control" id="prezime" required #prezime="ngModel" name="prezime"
+                [(ngModel)]="korisnik.prezime">
+        </div>
+        <div class="err" *ngIf="prezime.invalid && prezime.dirty">
+            Prezime je obavezno!
+       </div>
+        <div>
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" required #username="ngModel" name="username" 
+                [(ngModel)]="korisnik.username">
+        </div>
+        <div class="err" *ngIf="username.invalid && username.dirty">
+            Username je obavezan!
+       </div>
+        <div>
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" required #password="ngModel" name="password" 
+                [(ngModel)]="korisnik.password">
+
+        </div>
+        <div class="err" *ngIf="password.invalid && password.dirty">
+            Password je obavezan!
+       </div>
+       <div>
+            <label for="email" class="form-label">Email adresa</label>
+            <input type="text" class="form-control" id="email" required #adresa="ngModel" name="adresa"
+                [(ngModel)]="korisnik.adresa">
+        </div>
+        <div>
+            <label for="jmbg" class="form-label">JMBG</label>
+            <input type="text" class="form-control" id="jmbg" required #jmbg="ngModel" name="jmbg" 
+                [(ngModel)]="korisnik.jmbg" size="13">
+        </div>
+        <div class="col-12">
+            <button style="margin-top: 2%;" class="btn btn-primary" type="submit">Register</button>
+        </div>
+    </form>
+</div>
